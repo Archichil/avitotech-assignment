@@ -9,6 +9,7 @@ import Foundation
 
 protocol APIClient {
     func fetchProducts(offset: Int, limit: Int, search: String?, filters: [String: String]?) async throws -> [Product]
+    func fetchCategories() async throws -> [Category]
 }
 
 struct FakeStoreAPIClient: APIClient {
@@ -37,6 +38,13 @@ struct FakeStoreAPIClient: APIClient {
         print("[DEBUG] Request URL: \(url)")
         let (data, _) = try await urlSession.data(from: url)
         return try jsonDecoder.decode([Product].self, from: data)
+    }
+    
+    func fetchCategories() async throws -> [Category] {
+        let url = URL(string: baseURL + "/categories")!
+        let (data, _) = try await urlSession.data(from: url)
+        
+        return try jsonDecoder.decode([Category].self, from: data)
     }
 }
 
