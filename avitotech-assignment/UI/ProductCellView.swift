@@ -16,6 +16,7 @@ struct ProductCellView: View {
             Text(product.title)
                 .font(.callout)
                 .lineLimit(2)
+                .frame(minHeight: 40, alignment: .top)
             Text("$\(product.price, specifier: "%.2f")")
                 .font(.title3)
                 .bold()
