@@ -26,10 +26,17 @@ struct ProductListView: View {
                                     viewModel.appliedFilters = history.filters
                                     Task { await viewModel.loadProducts(reset: true) }
                                 }) {
-                                    Text(history.text)
-                                        .padding(8)
-                                        .background(Color.gray.opacity(0.2))
-                                        .cornerRadius(8)
+                                    if !history.filters.isEmpty {
+                                        Text("\(history.text) (Filtered)")
+                                            .padding(8)
+                                            .background(Color.gray.opacity(0.2))
+                                            .cornerRadius(8)
+                                    } else {
+                                        Text(history.text)
+                                            .padding(8)
+                                            .background(Color.gray.opacity(0.2))
+                                            .cornerRadius(8)
+                                    }
                                 }
                             }
                         }

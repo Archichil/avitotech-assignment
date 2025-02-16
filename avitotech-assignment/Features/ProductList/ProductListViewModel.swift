@@ -68,34 +68,7 @@ final class ProductListViewModel: ObservableObject {
         }
         isLoading = false
     }
-    
-    //    // MARK: - Загрузка товаров
-    //    @MainActor
-    //    func loadProducts(reset: Bool = false) async {
-    //        if reset {
-    //            // Сохраняем текущие настройки поиска
-    //            saveCurrentSearchSettings()
-    //            products.removeAll()
-    //        }
-    //        isLoading = true
-    //        do {
-    //            // Пример вызова API с offset и limit
-    //            let newProducts = try await apiClient.fetchProducts(offset: products.count, limit: 10, search: searchText, filters: appliedFilters)
-    //            products.append(contentsOf: newProducts)
-    //            // Если подгрузка возвращает результаты – записываем настройки в историю
-    //            if !newProducts.isEmpty {
-    //                recordSearchHistoryIfNeeded()
-    //            }
-    //            error = nil
-    //            hasMoreProducts = newProducts.count == 10
-    //            initialLoadCompleted = true
-    //        } catch {
-    //            self.error = error
-    //        }
-    //        isLoading = false
-    //    }
-    //}
-    
+        
         // MARK: - History Persistence
     
     private func saveSearchHistory() {

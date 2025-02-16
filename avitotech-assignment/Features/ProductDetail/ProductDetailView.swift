@@ -14,6 +14,7 @@ struct ProductDetailView: View {
     @State private var isAddedToCart = false
     @State private var isShowingGallery = false
     @State private var currentImageIndex = 0
+    @State private var showCart = false
 
     var body: some View {
         ScrollView {
@@ -59,26 +60,58 @@ struct ProductDetailView: View {
                 .padding(.horizontal)
             
                 // Add to cart
-                HStack {
-                    Button(action: { if quantity > 1 { quantity -= 1 } }) {
-                        Image(systemName: "minus.circle")
-                    }
-                    Text("\(quantity)")
-                        .padding(.horizontal)
-                    Button(action: { quantity += 1 }) {
-                        Image(systemName: "plus.circle")
-                    }
-                    
+                if !isAddedToCart {
                     Button(action: addToCart) {
-                        Text(isAddedToCart ? "Go to cart" : "Add to cart")
+                        Text("Add to cart")
+                            .fontWeight(.bold)
+                            .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.accentColor)
                             .foregroundColor(.white)
-                            .cornerRadius(8)
+                            .cornerRadius(10)
                     }
+                    .padding(.horizontal)
+                } else {
+                    HStack(spacing: 16) {
+                        HStack(spacing: 8) {
+                            Button(action: {
+                                if quantity > 1 { quantity -= 1 }
+                                CartManager.shared.update(product: product, quantity: quantity)
+                            }) {
+                                Image(systemName: "minus.circle.fill")
+                                    .foregroundColor(.accentColor)
+                                    .font(.title2)
+                            }
+                            
+                            Text("\(quantity)")
+                                .font(.title2)
+                                .fontWeight(.semibold)
+                                .frame(minWidth: 50)
+                            
+                            Button(action: {
+                                quantity += 1
+                                CartManager.shared.update(product: product, quantity: quantity)
+                            }) {
+                                Image(systemName: "plus.circle.fill")
+                                    .foregroundColor(.accentColor)
+                                    .font(.title2)
+                            }
+                        }
+                        
+                        
+                        Button(action: { showCart = true }) {
+                            Text("Go to cart")
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color.accentColor)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                .padding(.horizontal)
             }
         }
         .navigationTitle(product.title)
@@ -92,8 +125,14 @@ struct ProductDetailView: View {
                 }
             }
         }
+        .background(
+            NavigationLink(destination: CartView(), isActive: $showCart) {
+                EmptyView()
+            }
+            .hidden()
+        )
     }
-
+    
     private func shareProduct() {
         let shareText = """
                         Title: \(product.title)
@@ -118,12 +157,6 @@ struct ProductDetailView: View {
         if !isAddedToCart {
             CartManager.shared.add(product: product, quantity: quantity)
             isAddedToCart = true
-        } else {
-            //
         }
     }
-}
-
-#Preview {
-    ProductDetailView(product: ProductMockData.first!)
 }
