@@ -15,6 +15,27 @@ struct ProductListView: View {
         NavigationStack {
             VStack {
                 searchBar
+                if !viewModel.searchHistory.isEmpty {
+                    Text("Latest searches")
+                        .font(.caption)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            ForEach(viewModel.searchHistory, id: \.self) { history in
+                                Button(action: {
+                                    viewModel.searchText = history.text
+                                    viewModel.appliedFilters = history.filters
+                                    Task { await viewModel.loadProducts(reset: true) }
+                                }) {
+                                    Text(history.text)
+                                        .padding(8)
+                                        .background(Color.gray.opacity(0.2))
+                                        .cornerRadius(8)
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                }
                 contentView
                     .frame(maxHeight: .infinity, alignment: .center)
             }
