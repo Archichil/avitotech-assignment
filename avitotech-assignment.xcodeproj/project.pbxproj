@@ -8,11 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		A76297292D5CF1070002AA65 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A76297282D5CF1070002AA65 /* .gitignore */; };
+		A7A9542D2D62878000AF37B1 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A7A9542C2D62878000AF37B1 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A76297172D5CF0B90002AA65 /* avitotech-assignment.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "avitotech-assignment.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A76297282D5CF1070002AA65 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A7A9542C2D62878000AF37B1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -50,6 +52,7 @@
 		A762970E2D5CF0B90002AA65 = {
 			isa = PBXGroup;
 			children = (
+				A7A9542C2D62878000AF37B1 /* README.md */,
 				A76297282D5CF1070002AA65 /* .gitignore */,
 				A76297192D5CF0B90002AA65 /* avitotech-assignment */,
 				A76297182D5CF0B90002AA65 /* Products */,
@@ -128,6 +131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7A9542D2D62878000AF37B1 /* README.md in Resources */,
 				A76297292D5CF1070002AA65 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
