@@ -11,7 +11,16 @@ import SwiftUI
 struct avitotech_assignmentApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                ProductListView()
+                    .tabItem {
+                        Label("Products", systemImage: "list.dash")
+                    }
+                CartView()
+                    .tabItem {
+                        Label("Cart", systemImage: "cart")
+                    }
+            }
         }
     }
 }
